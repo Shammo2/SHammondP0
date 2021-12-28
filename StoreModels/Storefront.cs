@@ -6,4 +6,10 @@ public class Storefront
     public string Name { get; set; }
     public List<Inventory> Inventories { get; set; }
     public List<Order> Orders { get; set; }
+
+    
+
 }
+
+
+
