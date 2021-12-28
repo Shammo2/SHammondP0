@@ -10,13 +10,4 @@ public class Product
 
 }
 
-public class orderplacement{
 
-
-public void placeorder(){
-
-   
-
-
-}
-}

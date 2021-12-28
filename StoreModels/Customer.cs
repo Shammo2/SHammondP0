@@ -1,3 +1,4 @@
+
 namespace Models;
 
 public class Customer
@@ -10,48 +11,22 @@ public class Customer
     public List<Customer> users { get; set; }
 
 
+  public  Customer(){}
 
+        // public  Customer(string userUserName, string userPassword, int userId){
 
-  public  Customer(){
-            
-        }
+        //     UserName= userUserName;
+        //     PassWord= userPassword;
+        //     Id = userId;
+        // }
 
-        public  Customer(string userUserName, string userPassword, int userId){
-
-            UserName= userUserName;
-            PassWord= userPassword;
-            Id = userId;
-        }
-
-
-
-
-    public void SigninCheck(){
-
-
-
-    }
 
     public  void signup(){
-        Console.WriteLine("pls select a username");
-        UserName = Console.ReadLine();
-        System.Console.WriteLine( "pls select a password"  );
-        PassWord = Console.ReadLine();
-        Console.WriteLine(UserName + " " +  PassWord);
-        //Customer.Add(user);
+    
     }
 
 
     public void signin(){
-
-        Console.WriteLine("enter username");
-        var checkusername = Console.ReadLine();
-        System.Console.WriteLine( "enter password" );
-        var checkpassword = Console.ReadLine();
-
-        Console.WriteLine(checkusername +" " + checkpassword);
-
-        
 
     }
 

@@ -1,3 +1,4 @@
+
 using Models;
 using StoreBL;
 namespace UI;
@@ -56,41 +57,26 @@ public class ManagerUI{
                     string name = Console.ReadLine();
                     Console.WriteLine("Address: ");
                     string address = Console.ReadLine();
+                    Random rnd = new Random(10000);
+                    int storeid = rnd.Next();
+                    
 
                     Storefront newStore = new Storefront {
                         Name = name,
                         Address =address,
+                        StoreID = storeid
                     };
                     _BL.AddStore(newStore);
                     
                break; 
 
                case "x":
+               //store exit 
                break;
             }
-
             break;
 
-            // case "2":
-            //         Console.WriteLine("view order history");
-            //         Console.WriteLine("pick a store");
-            //         Console.WriteLine(" [x] exit  ");
-            //         string historychoice = Console.ReadLine();
-            //         switch(historychoice )
-            //         {
-            //         case "1":
-            //         Console.WriteLine(" Northstore history ");
-            //         break;
-
-            //         case "2":
-            //         Console.WriteLine(" Southstore history ");
-            //         break; 
-
-            //         case "x":
-            //         break;
-            //         }
-            //break;
-
+        
         case "x":
         managerExit = true;
         break;
