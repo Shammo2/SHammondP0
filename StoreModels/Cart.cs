@@ -1,8 +1,8 @@
 namespace Models;
 
-public class LineItem
+public class Cart
 {
-    public Product Item { get; set; }
+    public Product ItemID { get; set; }
     public int OrderId { get; set; }
     public int Quantity { get; set; }
 }

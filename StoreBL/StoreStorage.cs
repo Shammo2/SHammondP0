@@ -21,4 +21,19 @@ public class StoreStorage{
     }
 
 
+    public void AddProduct(int StoreIndex, Product ProductToAdd){
+
+    _dl.AddProduct(StoreIndex,ProductToAdd);        
+    }   
+    
+
+    public List<Product> GetAllProduct(int StoreIndex){
+
+      return _dl.GetAllProduct(StoreIndex);
+      
+    }
+public int GetStoreIndexByID(int StoreID){
+    return _dl.GetStoreIndexByID(StoreID);
+    
+}
 }

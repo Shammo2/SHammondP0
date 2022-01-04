@@ -20,5 +20,18 @@ public class UserRepo{
             string jsonString = JsonSerializer.Serialize(allUsers);
             File.WriteAllText(filePath, jsonString);
         }
+    public Customer GetActiveUser(int CustomerId){
+        List<Customer> allUsers = GetAllUsers();
+        Customer currUser = new Customer();
+        foreach(Customer user in allUsers){
+            if (user.CustomerId == CustomerId){
+                currUser = user;
+            }
+        }
+        return currUser;
+    }
+
+
+
 }
 

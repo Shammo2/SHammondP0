@@ -3,12 +3,13 @@ namespace Models;
 
 public class Customer
 {
-    public int Id { get; set; }
+    public int CustomerId { get; set; }
     public string UserName { get; set; }
     public string PassWord { get; set; }
     public List<Order> Orders { get; set; }
+    public List<Cart> Cart { get; set; }
 
-    public List<Customer> users { get; set; }
+    //public List<Customer> users { get; set; }
 
 
   public  Customer(){}
