@@ -7,7 +7,7 @@ public class Customer
     public string UserName { get; set; }
     public string PassWord { get; set; }
     public List<Order> Orders { get; set; }
-    public List<Cart> Cart { get; set; }
+    public List<Cartorder> Cart { get; set; }
 
     //public List<Customer> users { get; set; }
 

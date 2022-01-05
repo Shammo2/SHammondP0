@@ -36,4 +36,9 @@ public int GetStoreIndexByID(int StoreID){
     return _dl.GetStoreIndexByID(StoreID);
     
 }
+
+public void UpdateProduct(int StoreIndex,int ProductIndex, int Quantity){
+
+     _dl.UpdateProduct(StoreIndex, ProductIndex, Quantity);
+}
 }

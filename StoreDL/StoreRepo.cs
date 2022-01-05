@@ -20,8 +20,6 @@ public class StoreRepo{
             Storefront selectedstore = allstores[StoreIndex];
 
             return selectedstore.Inventory;
-            
-        
         }
         
 
@@ -42,21 +40,23 @@ public void AddProduct(int StoreIndex, Product ProductToAdd){
     if(selectedstore.Inventory == null){
         selectedstore.Inventory = new List<Product>();
     }
-    
     selectedstore.Inventory.Add(ProductToAdd);
-    
-    
     string jsonString = JsonSerializer.Serialize(allstores);
     File.WriteAllText(filePath, jsonString);
     }
 
-    public void UpdateProduct(int StoreIndex,int ItemID){
+    public void UpdateProduct(int StoreIndex,int ProductIndex, int Quantity){
 
     List<Storefront> allstores = GetAllStores();
     
     Storefront selectedstore = allstores[StoreIndex];
 
+    Product currProduct = selectedstore.Inventory![ProductIndex];
+
     
+    currProduct.Quantity= Quantity;
+    string jsonString = JsonSerializer.Serialize(allstores);
+    File.WriteAllText(filePath, jsonString);
 
     }
 public Storefront GetStoreByIndex(int StoreIndex)
@@ -83,16 +83,6 @@ public int GetStoreIndexByID(int StoreID){
     }   
 
 
-//idk what this is probably not needed 
-
-// List<Storefront> AllStores = GetAllStores();
-    // Storefront currStore = GetStoreByID(StoreID);
-    // if(currStore.Products == null){
-    //     currStore.Products = new List<Product>();
-    //     }
-    // currStore.Products.Add(productToAdd);
-    // string jsonString = JsonSerializer.Serialize(allStores);
-    // File.WriteAllText(filePath, jsonString);
 
 }
 

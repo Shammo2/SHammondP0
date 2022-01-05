@@ -7,7 +7,7 @@ public class Order
     public int CustomerId { get; set; }
     public int OrderNumber { get; set; }
     public int StoreId { get; set; }
-    public List<Cart> LineItems { get; set; }
+    public List<Cartorder> LineItems { get; set; }
     public decimal Total { get; set; }
     public decimal CalculateTotal() {
         //a method that would go through each lineitem in LineItems property
@@ -15,10 +15,10 @@ public class Order
         decimal total = 0;
         if(this.LineItems?.Count > 0)
         {
-            foreach(Cart lineitem in this.LineItems)
+            foreach(Cartorder lineitem in this.LineItems)
             {
                 //multiply the product's price by how many we're buying
-                total += lineitem.ItemID.Price * lineitem.Quantity;
+                total += lineitem.SelectedProduct.Price * lineitem.Quantity;
             }
         }
         this.Total = total;

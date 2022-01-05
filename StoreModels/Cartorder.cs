@@ -1,8 +1,8 @@
 namespace Models;
 
-public class Cart
+public class Cartorder
 {
-    public Product ItemID { get; set; }
+    public Product SelectedProduct { get; set; }
     public int OrderId { get; set; }
     public int Quantity { get; set; }
 }

@@ -31,7 +31,46 @@ public class UserRepo{
         return currUser;
     }
 
+    public void AdditemToCart(int CustomerId, Cartorder currentcartorder){
+        List<Customer> allUsers = GetAllUsers();
+        Customer activeuser = GetActiveUser(CustomerId);
+        
+        if(activeuser.Cart == null){
+        activeuser.Cart = new List<Cartorder>();
+    }
+    int i = 0;
+    foreach(Customer user in allUsers){
+        if(CustomerId ==user.CustomerId){
+           break;
+        }
+        else{
+            i++;
+        }
+    } 
+        activeuser.Cart.Add(currentcartorder);
+        allUsers[i] = activeuser;
+        string jsonString = JsonSerializer.Serialize(allUsers);
+        File.WriteAllText(filePath, jsonString);
+    }
+
+public void GetAllUserOrders(int CustomerId){
+ List<Customer> allUsers = GetAllUsers();
+ Customer activeuser = GetActiveUser(CustomerId); 
+
+int i = 0;
+    foreach(Customer user in allUsers){
+        if(CustomerId ==user.CustomerId){
+           break;
+        }
+        else{
+            i++;
+        }
+}
+allUsers[i] = activeuser;
 
 
 }
 
+
+
+}//class end

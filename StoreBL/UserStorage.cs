@@ -20,5 +20,12 @@ public class UserStorage{
         _dl.AddUser(UserToAdd);
     }
 
+    
+        public void AdditemToCart(int CustomerId, Cartorder currentcartorder){
+           _dl.AdditemToCart(CustomerId,currentcartorder);
+        }
+    public void GetAllUserOrders(int CustomerId){
+    _dl.GetAllUserOrders(CustomerId);
+}
 
 }
