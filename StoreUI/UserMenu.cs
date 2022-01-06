@@ -25,6 +25,28 @@ while(!exit){
                 case "1":
                 Console.WriteLine("===You entered: Checkout===");
                 
+                List<Customer> allUsers = _BL.GetAllUsers();
+                Customer activeuser = _BL.GetActiveUser(CustomerId);
+                List<Cartorder>  currentCart = activeuser.Cart;
+                if(currentCart == null || currentCart.Count == 0){
+                    Console.WriteLine(" You have no items ");
+                    break;
+                }
+                string currTime = DateTime.Now.ToString();
+                double currTimeSeconds = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds;
+                Random rnd = new Random(10000);
+                int orderNum = rnd.Next();
+                
+                Order newStore = new Order {
+                OrderDate= currTime,
+                CustomerId = CustomerId,
+                OrderNumber =orderNum, 
+                StoreId = null
+                //LineItems
+                };
+                
+                
+                
                 break;
 
                 case "2":
@@ -75,11 +97,13 @@ while(!exit){
                 case "3":
                 Console.WriteLine("you entered view order history");
                 
-                // List<Cartorder> Orderhistory =_BL.GetAllUserOrders(CustomerId);
-                    
-                //     for(int i = 0; i < Orderhistory.Count; i++){
-                //     Console.WriteLine($"[{i}] Name: {Orderhistory[i].SelectedProduct} \nDescription: {Orderhistory[i].Quantity} \nQuantity: {Orderhistory[i].OrderId}" ); 
-                //     }
+                //List<Cartorder> Orderhistory =_BL.GetAllUserOrders(CustomerId);
+                List<Customer> allUsers = _BL.GetAllUsers();
+                Customer activeuser = _BL.GetActiveUser(CustomerId); 
+                List<Order> Orderhistory = activeuser.Orders;
+                    for(int i = 0; i < Orderhistory.Count; i++){
+                   // Console.WriteLine($"[{i}] Name: {Orderhistory[i].SelectedProduct} \nDescription: {Orderhistory[i].Quantity} \nQuantity: {Orderhistory[i].OrderId}" ); 
+                    }
 
                 break;
                 

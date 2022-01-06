@@ -22,14 +22,5 @@ public class Customer
         // }
 
 
-    public  void signup(){
-    
-    }
-
-
-    public void signin(){
-
-    }
-
 }
 

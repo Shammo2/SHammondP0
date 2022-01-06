@@ -22,7 +22,15 @@ public class StoreRepo{
             return selectedstore.Inventory;
         }
         
+        public List<Order> GetAllOrders(int StoreIndex){
+            
+            
+            List<Storefront> allstores = GetAllStores();
+            Storefront selectedstore = allstores[StoreIndex];
+            
 
+            return selectedstore.StoreOrders;
+        }
     public void AddStore(Storefront StoreToAdd)
         {
             List<Storefront> allstores = GetAllStores();
@@ -34,7 +42,7 @@ public class StoreRepo{
 public void AddProduct(int StoreIndex, Product ProductToAdd){
     
     List<Storefront> allstores = GetAllStores();
-    
+
     Storefront selectedstore = allstores[StoreIndex];
     
     if(selectedstore.Inventory == null){
@@ -65,22 +73,22 @@ public Storefront GetStoreByIndex(int StoreIndex)
         return allStores[StoreIndex];
     }
 
-public int GetStoreIndexByID(int StoreID){
+// public int GetStoreIndexByID(int StoreID){
         
-        List<Storefront> allstores = GetAllStores();
+//         List<Storefront> allstores = GetAllStores();
         
-        int i=0;
-        foreach(Storefront Store in allstores){
-            if(StoreID == Store.StoreID){
-                return i;
-            }
-            else{
-                i++;
-            }
+//         int i=0;
+//         foreach(Storefront Store in allstores){
+//             if(StoreID == Store.StoreID){
+//                 return i;
+//             }
+//             else{
+//                 i++;
+//             }
 
-        }
-        return i;
-    }   
+//         }
+//         return i;
+//     }   
 
 
 

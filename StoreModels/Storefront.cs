@@ -7,7 +7,7 @@ public class Storefront
     
     public int StoreID {get; set;} 
     public List<Product> Inventory { get; set; }
-    public List<Order> Orders { get; set; }
+    public List<Order> StoreOrders { get; set; }
 
     
 

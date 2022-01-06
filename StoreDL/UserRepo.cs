@@ -36,40 +36,40 @@ public class UserRepo{
         Customer activeuser = GetActiveUser(CustomerId);
         
         if(activeuser.Cart == null){
-        activeuser.Cart = new List<Cartorder>();
-    }
-    int i = 0;
-    foreach(Customer user in allUsers){
-        if(CustomerId ==user.CustomerId){
-           break;
+            activeuser.Cart = new List<Cartorder>();
         }
-        else{
-            i++;
-        }
-    } 
+        int i = 0;
+        foreach(Customer user in allUsers){
+            if(CustomerId ==user.CustomerId){
+            break;
+            }
+            else{
+                i++;
+            }
+        } 
         activeuser.Cart.Add(currentcartorder);
         allUsers[i] = activeuser;
         string jsonString = JsonSerializer.Serialize(allUsers);
         File.WriteAllText(filePath, jsonString);
     }
 
-public void GetAllUserOrders(int CustomerId){
- List<Customer> allUsers = GetAllUsers();
- Customer activeuser = GetActiveUser(CustomerId); 
+// public void GetAllUserOrders(int CustomerId){
 
-int i = 0;
-    foreach(Customer user in allUsers){
-        if(CustomerId ==user.CustomerId){
-           break;
-        }
-        else{
-            i++;
-        }
-}
-allUsers[i] = activeuser;
+  //List<Customer> allUsers = GetAllUsers();
+  //Customer activeuser = GetActiveUser(CustomerId); 
 
+// // int i = 0;
+// //     foreach(Customer user in allUsers){
+// //         if(CustomerId ==user.CustomerId){
+// //            break;
+// //         }
+// //         else{
+// //             i++;
+// //         }
+// // }
+// // allUsers[i] = activeuser;
 
-}
+// }
 
 
 

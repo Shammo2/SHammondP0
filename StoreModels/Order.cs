@@ -3,10 +3,10 @@ namespace Models;
 public class Order
 {
     //You can also use DateTime data type for this
-    public DateOnly OrderDate { get; set; }
+    public string OrderDate { get; set; }
     public int CustomerId { get; set; }
     public int OrderNumber { get; set; }
-    public int StoreId { get; set; }
+    public int? StoreId { get; set; }
     public List<Cartorder> LineItems { get; set; }
     public decimal Total { get; set; }
     public decimal CalculateTotal() {
