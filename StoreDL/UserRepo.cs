@@ -31,12 +31,12 @@ public class UserRepo{
         return currUser;
     }
 
-    public void AdditemToCart(int CustomerId, Cartorder currentcartorder){
+    public void AdditemToCart(int CustomerId, CustomerOrder currentcartorder){
         List<Customer> allUsers = GetAllUsers();
         Customer activeuser = GetActiveUser(CustomerId);
         
         if(activeuser.Cart == null){
-            activeuser.Cart = new List<Cartorder>();
+            activeuser.Cart = new List<CustomerOrder>();
         }
         int i = 0;
         foreach(Customer user in allUsers){

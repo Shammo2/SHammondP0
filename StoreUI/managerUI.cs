@@ -1,11 +1,11 @@
-
+//using Serilog;
+//using Microsoft.Extensions.Logging;
 using Models;
 using StoreBL;
+using System.Text.RegularExpressions;
 namespace UI;
 
 
-
-    
 public class ManagerUI{
          
          private StoreStorage _BL;
@@ -17,6 +17,7 @@ public class ManagerUI{
 
         bool managerExit = false;
         while(managerExit == false){
+        Console.WriteLine(" ===Welcome to Manager menu=== ");
         Console.WriteLine("[1] Manage inventory");
         Console.WriteLine("[2] view order history");
         Console.WriteLine("[3] make a new store  ");
@@ -44,11 +45,12 @@ public class ManagerUI{
             break;
             case "2":
                 Console.WriteLine("You Entered: view order history");
-                ViewOrderHistory();
+                //ViewOrderHistory();
             break;
             
             case"3":
             MakeAStore();
+            
             break;
             
             case "x":
@@ -83,16 +85,26 @@ public void manager(){
     
     } 
 
-private void ViewOrderHistory(){
-List<Storefront> storeorders = _BL.GetAllStores();
-    for(int i = 0; i < storeorders.Count; i++)
-    {
-        Console.WriteLine($"[{i}] Name: {storeorders[i].Name} \nAddress: {storeorders[i].Address}");
-    }
-    int orderselection = Int32.Parse(Console.ReadLine());
-    Console.WriteLine(orderselection);
+// private void ViewOrderHistory(){
 
-}
+// List<Storefront> storeorders = _BL.GetAllStores();
+// List<StoreOrder> getallOrders = _BL.GetAllOrders(StoreIndex1);
+//     for(int i = 0; i < storeorders.Count; i++)
+//     {
+//         Console.WriteLine($"[{i}] Name: {storeorders[i].Name} \nAddress: {storeorders[i].Address}");
+//     }
+//     int storeselection = Int32.Parse(Console.ReadLine());
+//     Console.WriteLine(storeselection);
+
+//     foreach(StoreOrder storeorder in getallOrders){
+//                 Console.WriteLine($"\nPlaced on {storeorder.OrderDate} by {storeorder.CustomerID}");
+//                 foreach(CustomerOrder Order in storeorder.Orders!){
+//                     Console.WriteLine($"| {Order.ProductName} | Qty: {Order.Quantity} || ${Order.TotalPrice}");
+//                 }
+//                 Console.WriteLine($"| Total Price: ${storeorder.TotalAmount}");
+//             }
+
+// }
     private void MakeAStore(){
     List<Storefront> AllStores = _BL.GetAllStores();
     Console.WriteLine("You Entered: make a store ");
@@ -101,8 +113,8 @@ List<Storefront> storeorders = _BL.GetAllStores();
             string name = Console.ReadLine();
             Console.WriteLine("Address: ");
             string address = Console.ReadLine();
-            Random rnd = new Random(10000);
-            int storeid = rnd.Next();
+            Random rnd = new Random();
+            int storeid = rnd.Next(10000);
             
             Storefront newStore = new Storefront {
                 Name = name,
@@ -135,10 +147,10 @@ List<Storefront> storeorders = _BL.GetAllStores();
             Console.WriteLine("you chose" + StoreInventory[productselection].ProductName);
             Console.WriteLine("Enter quantity");
             int quantityadjust = Int32.Parse(Console.ReadLine());
-            StoreInventory[productselection].Quantity= quantityadjust;
-            _BL.UpdateProduct(StoreIndex1,productselection,quantityadjust);
-                    
-
+            //StoreInventory[productselection].Quantity= quantityadjust;
+            int ProductID =StoreInventory[productselection].ItemID;
+            
+            _BL.UpdateProduct(ProductID,quantityadjust);
 
     }
 
@@ -164,16 +176,16 @@ List<Storefront> storeorders = _BL.GetAllStores();
                     int quantity = Int32.Parse(Console.ReadLine());
                     Console.WriteLine("Enter item: Price");
                     decimal price = decimal.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter item: ID");
-                    int ItemId = Int32.Parse(Console.ReadLine());
                     int StoreIndex= selection;
+                    Random rnd = new Random();
+                    int ItemID = rnd.Next(10000);
                     
                     Product ProductToAdd = new Product{
                         ProductName = prodname,
                         Description =description,
                         Price = price,
                         Quantity = quantity,
-                        ItemID = ItemId
+                        ItemID = ItemID
                 };
                 _BL.AddProduct(StoreIndex,ProductToAdd);
                 Console.WriteLine(" Product added "); 

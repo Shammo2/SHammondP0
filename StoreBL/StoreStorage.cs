@@ -4,11 +4,14 @@ namespace StoreBL;
 
 public class StoreStorage{
 
-    private StoreRepo _dl;
-
+    private DBStoreRepo _dl;
+    private string _connectionString;
+    
+    
     public StoreStorage()
     {
-        _dl = new StoreRepo();
+        _connectionString = File.ReadAllText("connectionString.txt");
+        _dl = new DBStoreRepo(_connectionString);
     }
     public List<Storefront> GetAllStores() 
     {
@@ -19,6 +22,7 @@ public class StoreStorage{
     {
         _dl.AddStore(storeToAdd);
     }
+    
 
 
     public void AddProduct(int StoreIndex, Product ProductToAdd){
@@ -37,8 +41,11 @@ public class StoreStorage{
     
 // }
 
-public void UpdateProduct(int StoreIndex,int ProductIndex, int Quantity){
+public void AddStoreOrder(StoreOrder newStoreOrder){
+    _dl.AddStoreOrder(newStoreOrder);
+}
+public void UpdateProduct(int ItemID, int Quantity){
 
-     _dl.UpdateProduct(StoreIndex, ProductIndex, Quantity);
+    _dl.UpdateProduct(ItemID, Quantity);
 }
 }

@@ -1,0 +1,1 @@
+Server=database-1.cmjutiuzuqrm.us-east-2.rds.amazonaws.com,1433;Initial Catalog=Fruits;User ID=admin;Password=database22;Encrypt=False;

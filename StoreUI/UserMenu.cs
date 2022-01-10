@@ -14,8 +14,8 @@ private UserStorage _BL;
 public void StartUserMenu(int CustomerId){
 bool exit = false;
 while(!exit){        
-        Console.WriteLine("====Welcome To Fruits-R-Us====");
-        Console.WriteLine("[1] checkout");
+        Console.WriteLine("===What Would you like to do?===");
+        Console.WriteLine("[1] View Cart and checkout");
         Console.WriteLine("[2] purchase from stores");
         Console.WriteLine("[3] view order history");
         Console.WriteLine("[x] Exit");
@@ -23,30 +23,42 @@ while(!exit){
             switch(menuinput){
 
                 case "1":
-                Console.WriteLine("===You entered: Checkout===");
+                Console.WriteLine("===You entered: View Cart and checkout===");
                 
                 List<Customer> allUsers = _BL.GetAllUsers();
                 Customer activeuser = _BL.GetActiveUser(CustomerId);
-                List<Cartorder>  currentCart = activeuser.Cart;
-                if(currentCart == null || currentCart.Count == 0){
-                    Console.WriteLine(" You have no items ");
+                List<CustomerOrder>  currentCart = activeuser.Cart;
+                int storeID =0;
+                if(activeuser.Cart == null || currentCart.Count == 0){ 
+                    //Console.WriteLine(" You have no items ");
+                    activeuser.Cart = new List<CustomerOrder>();
+                }
+                else{
+                    storeID = currentCart[0].storeID;
+                }
+                decimal CustomerTotal =0;
+                
+                //foreach(CustomerOrder currCart in currentCart ){
+                for(int i = 0; i < currentCart.Count; i++){
+                Console.WriteLine($"[{i}] Name: {currentCart[i].ProductName}  \nQuantity: {currentCart[i].Quantity} \nPrice: {currentCart[i].TotalPrice} $ " ); 
+                
+                CustomerTotal += currentCart[i].TotalPrice;
+                
+                }
+
+                Console.WriteLine(CustomerTotal);
+                Console.WriteLine("Checkout? Y/N");
+                string checkoutinput = Console.ReadLine();
+                if(checkoutinput == "y"){
+                Console.WriteLine("You chose checkout");
+                
+                Checkout(CustomerId,storeID,CustomerTotal, currentCart);
+                }
+                else{
                     break;
                 }
-                string currTime = DateTime.Now.ToString();
-                double currTimeSeconds = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds;
-                Random rnd = new Random(10000);
-                int orderNum = rnd.Next();
-                
-                Order newStore = new Order {
-                OrderDate= currTime,
-                CustomerId = CustomerId,
-                OrderNumber =orderNum, 
-                StoreId = null
-                //LineItems
-                };
-                
-                
-                
+
+
                 break;
 
                 case "2":
@@ -81,30 +93,33 @@ while(!exit){
 
                 int ProductQuantity = currentproduct.Quantity;
 
-                _storeBL.UpdateProduct(StoreIndex, productIndex, (ProductQuantity -(int)Itemquantity));
-                Random rnd = new Random(10000);
-                int orderid = rnd.Next();
-                Cartorder currentcartorder = new Cartorder{
-                    SelectedProduct = currentproduct,
-                    OrderId = orderid,
-                    Quantity = (int)Itemquantity,
-
+                int ItemID = currentproduct.ItemID;
+                _storeBL.UpdateProduct(ItemID, (ProductQuantity -(int)Itemquantity));
+                Random rand = new Random();
+                int orderid = rand.Next(10000);
+                CustomerOrder currentcartorder = new CustomerOrder{
+                    CustomerID = CustomerId,
+                    storeID = AllStores[StoreIndex].StoreID,
+                    CustomerOrderID = 0,
+                    ProductID = currentproduct.ItemID,
+                    ProductName = currentproduct.ProductName,
+                    TotalPrice = ((int)Itemquantity * (decimal)currentproduct.Price),
+                    Quantity = (int)Itemquantity
                 };
-
-                _BL.AdditemToCart(CustomerId,currentcartorder);
+                
+                _BL.AddCustomerOrder(CustomerId,currentcartorder);
                 break;
 
                 case "3":
                 Console.WriteLine("you entered view order history");
                 
-                //List<Cartorder> Orderhistory =_BL.GetAllUserOrders(CustomerId);
-                List<Customer> allUsers = _BL.GetAllUsers();
-                Customer activeuser = _BL.GetActiveUser(CustomerId); 
-                List<Order> Orderhistory = activeuser.Orders;
-                    for(int i = 0; i < Orderhistory.Count; i++){
-                   // Console.WriteLine($"[{i}] Name: {Orderhistory[i].SelectedProduct} \nDescription: {Orderhistory[i].Quantity} \nQuantity: {Orderhistory[i].OrderId}" ); 
+                List<StoreOrder> Orderhistory =_BL.GetAllUserOrders(CustomerId);
+                List<StoreOrder> getallUsers = _BL.GetAllUsers();
+                Customer activeuser2 = _BL.GetActiveUser(CustomerId); 
+                List<StoreOrder> Orderhistory2 = activeuser2.Orders;
+                    for(int i = 0; i < Orderhistory2.Count; i++){
+                    Console.WriteLine($"[{i}] Name: {Orderhistory[i].SelectedProduct} \nDescription: {Orderhistory[i].Quantity} \nQuantity: {Orderhistory[i].OrderId}" ); 
                     }
-
                 break;
                 
                 case "x":
@@ -114,7 +129,31 @@ while(!exit){
                 }
     
         }
-        Console.WriteLine("goodbye");
+    Console.WriteLine("goodbye");
 }  
+
+public void Checkout(int CustomerId, int storeID, decimal CustomerTotal, List<CustomerOrder> currentCart){
+
+                string currTime = DateTime.Now.ToString();
+                double currTimeSeconds = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds;
+                Random rnd = new Random();
+                int orderNum = rnd.Next(100000);
+                // order num is the order number accosiated with the order we are creating (new store order)
+                foreach(CustomerOrder cOrder in currentCart){
+                    
+                    _BL.UpdateCustomerOrder(CustomerId, orderNum);
+                }
+                
+                StoreOrder newStoreOrder = new StoreOrder {
+                orderID = orderNum,
+                OrderDate= currTime,
+                CustomerID = CustomerId,
+                storeID = storeID,
+                TotalAmount = CustomerTotal
+                };
+                _storeBL.AddStoreOrder(newStoreOrder);
+
+
+}
 }
 

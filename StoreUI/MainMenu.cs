@@ -15,7 +15,7 @@ public class MainMenu {
     public void Start() {
 
 while(!exit){   
-        
+        Console.WriteLine("===Welcome To Fruits-R-Us===");
         Console.WriteLine("[1] sign in");
         Console.WriteLine("[2] create account");
         Console.WriteLine("[3] manager login ");
@@ -24,16 +24,16 @@ while(!exit){
                     
                     switch(signinput){
                     case "1":
-                        bool exists = false;
                         Console.WriteLine("You entered: Sign in");                        
                         Console.WriteLine("enter username");
                         string checkusername = Console.ReadLine();
                         List<Customer> users = _BL.GetAllUsers();
+                        bool exists = false;
                         string loginpassword = "";
                         int CustomerId = 0;
                         foreach( Customer customer in users){
                             if(checkusername==customer.UserName){
-                                Console.WriteLine(" username found ");
+                                Console.WriteLine("username found");
                                 loginpassword= customer.PassWord;
                                 CustomerId = customer.CustomerId;
                                 exists=true;
@@ -41,16 +41,21 @@ while(!exit){
                             
                         }
                         if(exists){
-                        System.Console.WriteLine( "enter password" );
-                        string checkpassword = Console.ReadLine();
-                        if(loginpassword == checkpassword){
+                            System.Console.WriteLine("enter password");
+                            string checkpassword = Console.ReadLine();
+                            
+                            if(loginpassword == checkpassword){
 
-                        Console.WriteLine(" signed in ");
-                        new UserMenu().StartUserMenu(CustomerId);
+                            Console.WriteLine("signed in ");
+                            new UserMenu().StartUserMenu(CustomerId);
+                            }
+                            else{
+                                Console.WriteLine("Try again");
+                            }
+
                         }
                         else{
-                            Console.WriteLine(" its wrong ");
-                        }
+                            Console.WriteLine("username not found");
                         }
 
                     break;
@@ -62,8 +67,8 @@ while(!exit){
                         System.Console.WriteLine( "pls select a password"  );
                         string password = Console.ReadLine();
                         Console.WriteLine("username:" +username + " Password:" +  password);
-                        Random rnd = new Random(10000);
-                        int userid = rnd.Next();
+                        Random rnd = new Random();
+                        int userid = rnd.Next(10000);
                         
                         Customer newUser = new Customer {
                         UserName = username,

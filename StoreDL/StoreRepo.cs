@@ -22,7 +22,7 @@ public class StoreRepo{
             return selectedstore.Inventory;
         }
         
-        public List<Order> GetAllOrders(int StoreIndex){
+        public List<StoreOrder> GetAllOrders(int StoreIndex){
             
             
             List<Storefront> allstores = GetAllStores();
