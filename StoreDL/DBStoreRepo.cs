@@ -40,7 +40,7 @@ public List<Storefront> GetAllStores(){
     DataTable storeTable = StoreSet.Tables["Storefront"];
     DataTable productTable = StoreSet.Tables["Product"];
     DataTable storeOrderTable = StoreSet.Tables["StoreOrder"];
-    DataTable productOrderTable = StoreSet.Tables["ProductOrder"];
+    DataTable CustomerOrderTable = StoreSet.Tables["CustomerOrder"];
         if(storeTable != null){   
             foreach(DataRow row in storeTable.Rows){
                     
@@ -53,13 +53,13 @@ public List<Storefront> GetAllStores(){
                         ).ToList();
                     }
                 if (storeOrderTable != null){
-                        StoreFront.StoreOrders = storeOrderTable.AsEnumerable().Where(r => (int) r["storeID"] == StoreFront.StoreID).Select(
+                        StoreFront.StoreOrders = storeOrderTable.AsEnumerable().Where(r => (int) r["StoreID"] == StoreFront.StoreID).Select(
                             r => new StoreOrder(r)
                         ).ToList();
                     }
-                if(productOrderTable != null){
+                if(CustomerOrderTable != null){
                         foreach(StoreOrder StoreOrder in StoreFront.StoreOrders){
-                            StoreOrder.Orders = productOrderTable!.AsEnumerable().Where(r => (int) r["storeOrderID"] == StoreFront.StoreID).Select(
+                            StoreOrder.Orders = CustomerOrderTable.AsEnumerable().Where(r => (int) r["CustomerOrderID"] == StoreOrder.orderID).Select(
                                 r => new CustomerOrder(r)
                             ).ToList();
                             }
@@ -75,10 +75,10 @@ public List<Storefront> GetAllStores(){
 /// </summary>
 /// <param name="StoreIndex"></param>
 /// <returns></returns>
-public List<Product> GetAllProduct(int StoreIndex){
+public List<Product> GetAllProduct(int StoreID){
     List<Product> allProd = new List<Product>();
     using SqlConnection connection = new SqlConnection(_connectionString);
-        string ProdSelect = "Select * From Product";
+        string ProdSelect = $"Select * From Product WHERE StoreID = {StoreID}";
         DataSet ProdSet = new DataSet();
         using SqlDataAdapter ProdAdapter = new SqlDataAdapter(ProdSelect, connection);
         ProdAdapter.Fill(ProdSet, "Product");
@@ -141,12 +141,13 @@ public void AddStore(Storefront StoreToAdd){
         using SqlConnection connection = new SqlConnection(_connectionString);
         connection.Open();
         
-        string sqlCmd = "INSERT INTO Storefront (ID, Address, Name) VALUES (@ID, @address, @name)"; 
+        string sqlCmd = "INSERT INTO Storefront (ID, Address, Name ) VALUES (@ID, @address, @name)"; 
         using SqlCommand cmdAddStore= new SqlCommand(sqlCmd, connection);
         //Adding paramaters
         cmdAddStore.Parameters.AddWithValue("@ID", StoreToAdd.StoreID);
         cmdAddStore.Parameters.AddWithValue("@address", StoreToAdd.Address);
         cmdAddStore.Parameters.AddWithValue("@name", StoreToAdd.Name);
+        
         cmdAddStore.ExecuteNonQuery();
         connection.Close();
     }
@@ -156,7 +157,7 @@ public void AddStore(Storefront StoreToAdd){
         using SqlConnection connection = new SqlConnection(_connectionString);
         connection.Open();
         
-        string sqlCmd = "INSERT INTO Product (Id,ProdName,ProdDescription,ProdPrice,ProdQuantity) VALUES (@Id, @name, @description, @price, @quantity)"; 
+        string sqlCmd = "INSERT INTO Product (Id,ProdName,ProdDescription,ProdPrice,ProdQuantity, StoreID) VALUES (@Id, @name, @description, @price, @quantity, @storeID)"; 
         using SqlCommand cmdAddProd= new SqlCommand(sqlCmd, connection);
         //Adding paramaters
         cmdAddProd.Parameters.AddWithValue("@Id", ProductToAdd.ItemID);
@@ -164,6 +165,7 @@ public void AddStore(Storefront StoreToAdd){
         cmdAddProd.Parameters.AddWithValue("@description", ProductToAdd.Description);
         cmdAddProd.Parameters.AddWithValue("@price", ProductToAdd.Price);
         cmdAddProd.Parameters.AddWithValue("@quantity", ProductToAdd.Quantity);
+        cmdAddProd.Parameters.AddWithValue("@storeID", ProductToAdd.StoreID);
         
         cmdAddProd.ExecuteNonQuery();
         connection.Close();

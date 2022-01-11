@@ -98,19 +98,20 @@ public void AddUser(Customer userToAdd){
         
         using SqlConnection connection = new SqlConnection(_connectionString);
         connection.Open();
-        string sqlCmd = "INSERT INTO CustomerOrder (CustomerID,StoreID,CustomerOrderID,ProdID,ProdName,Total,Quantity) VALUES (@customer,@storeID,@customorderid,@productid,@productname,@totalprice,@quantity)";
+        string sqlCmd = "INSERT INTO CustomerOrder (CustomerID,StoreID,CustomerOrderID,ProdID,ProdName,Total,Quantity, ID) VALUES (@customer,@storeID,@customorderid,@productid,@productname,@totalprice,@quantity, @ID)";
         using SqlCommand cmdcartorder= new SqlCommand(sqlCmd, connection);
         cmdcartorder.Parameters.AddWithValue("@customer", currentcartorder.CustomerID );
         cmdcartorder.Parameters.AddWithValue("@storeID", currentcartorder.storeID );
         cmdcartorder.Parameters.AddWithValue("@customorderid", currentcartorder.CustomerOrderID );
         cmdcartorder.Parameters.AddWithValue("@productid", currentcartorder.ProductID );
         cmdcartorder.Parameters.AddWithValue("@productname", currentcartorder.ProductName );
-        cmdcartorder.Parameters.AddWithValue("@totalprice", currentcartorder.CustomerID );
+        cmdcartorder.Parameters.AddWithValue("@totalprice", currentcartorder.TotalPrice);
         cmdcartorder.Parameters.AddWithValue("@quantity", currentcartorder.Quantity);
+        cmdcartorder.Parameters.AddWithValue("@ID", currentcartorder.ID);
         
         cmdcartorder.ExecuteNonQuery();
         connection.Close();
-        Log.Information("new customer order added to database{customer}{totalprice}",currentcartorder.CustomerID,currentcartorder.CustomerID );
+        Log.Information("new customer order added to database{customer}{totalprice}",currentcartorder.CustomerID,currentcartorder.TotalPrice);
     }
 
 /// <summary>
@@ -122,10 +123,11 @@ public void AddUser(Customer userToAdd){
     
     using SqlConnection connection = new SqlConnection(_connectionString);
     connection.Open();
-    string sqlEditCmd = $"UPDATE CustomerOrder SET CustomerOrderID = @CustomerOrderID WHERE CustomerID = @CustomerID";
+    string sqlEditCmd = $"UPDATE CustomerOrder SET CustomerOrderID = @CustomerOrderID WHERE CustomerID = @CustomerID AND CustomerOrderID = @0";
     using SqlCommand cmdEditProd= new SqlCommand(sqlEditCmd, connection);
     cmdEditProd.Parameters.AddWithValue("@CustomerOrderID", CustomerOrderID);
     cmdEditProd.Parameters.AddWithValue("@CustomerID", CustomerID);
+    cmdEditProd.Parameters.AddWithValue("@0", 0);
     
     cmdEditProd.ExecuteNonQuery();
     connection.Close();

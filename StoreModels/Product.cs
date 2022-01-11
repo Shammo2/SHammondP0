@@ -11,6 +11,7 @@ public Product(DataRow row){
         Price = (decimal)row["ProdPrice"];
         Quantity = (int)(row)["ProdQuantity"];
         ItemID = (int)row["Id"];
+        StoreID = (int)row["StoreID"];
     }
 
         public string ProductName { get; set; }
@@ -18,6 +19,7 @@ public Product(DataRow row){
         public decimal Price { get; set; }
         public int Quantity {get; set;}
         public int ItemID {get; set;}
+        public int StoreID {get; set;}
 
 }
 

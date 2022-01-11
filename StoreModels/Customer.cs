@@ -13,7 +13,7 @@ public class Customer
     public int CustomerId { get; set; }
     public string UserName { get; set; }
     public string PassWord { get; set; }
-    public List<Order> Orders { get; set; }
+    //public List<Order> Orders { get; set; }
     public List<CustomerOrder> Cart { get; set; }
     public List<StoreOrder> FinishedOrders {get; set;}
 

@@ -13,6 +13,7 @@ public CustomerOrder(DataRow r){
         ProductName = r["ProdName"].ToString() ?? "";
         TotalPrice = (decimal)r["Total"];
         Quantity = (int) r["Quantity"];
+        ID =(int)r["ID"];
     }
 
 
@@ -23,4 +24,5 @@ public CustomerOrder(DataRow r){
     public string ProductName{ get; set; }
     public decimal TotalPrice { get; set; }
     public int Quantity {get; set;}
+    public int ID {get; set;}
 }

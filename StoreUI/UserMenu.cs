@@ -1,4 +1,5 @@
 using Models;
+using System.Text.RegularExpressions;
 using StoreBL;
 namespace UI;
 
@@ -76,38 +77,50 @@ while(!exit){
                 int? selection = Int32.Parse(Console.ReadLine());
                 
                 int StoreIndex= (int)selection;
+
+                int StoreID = AllStores[StoreIndex].StoreID;
                 
-                List<Product> StoreInventory =_storeBL.GetAllProduct(StoreIndex);
+                List<Product> StoreInventory =_storeBL.GetAllProduct(StoreID);
                 for(int i = 0; i < StoreInventory.Count; i++){
                 Console.WriteLine($"[{i}] Name: {StoreInventory[i].ProductName} \nDescription: {StoreInventory[i].Description} \nQuantity: {StoreInventory[i].Quantity} \nPrice: {StoreInventory[i].Price}" ); 
                 }
                 
+                //product select
                 Console.WriteLine("Select Products to add to cart  ");
-                int? Itemselection = Int32.Parse(Console.ReadLine());
+                int Itemselection = Int32.Parse(Console.ReadLine());
+                int productIndex= Itemselection;
                 
-                int productIndex= (int)Itemselection;
-                
+                // quantity
                 Product currentproduct = StoreInventory[productIndex];
                 Console.WriteLine("Select Quantity ");
                 int? Itemquantity = Int32.Parse(Console.ReadLine());
 
+                
                 int ProductQuantity = currentproduct.Quantity;
-
                 int ItemID = currentproduct.ItemID;
                 _storeBL.UpdateProduct(ItemID, (ProductQuantity -(int)Itemquantity));
                 Random rand = new Random();
                 int orderid = rand.Next(10000);
+                
+                try{
                 CustomerOrder currentcartorder = new CustomerOrder{
                     CustomerID = CustomerId,
                     storeID = AllStores[StoreIndex].StoreID,
                     CustomerOrderID = 0,
+                    ID =orderid,
                     ProductID = currentproduct.ItemID,
                     ProductName = currentproduct.ProductName,
                     TotalPrice = ((int)Itemquantity * (decimal)currentproduct.Price),
                     Quantity = (int)Itemquantity
                 };
-                
                 _BL.AddCustomerOrder(CustomerId,currentcartorder);
+                }
+
+                catch(Exception ex){
+                    Console.WriteLine(ex.Message);
+                }
+                
+                
                 break;
 
                 case "3":
@@ -115,18 +128,45 @@ while(!exit){
                 List<Customer> allUsers2 = _BL.GetAllUsers();
                 Customer activeuser2 = _BL.GetActiveUser(CustomerId);
                 List<StoreOrder> FinishedOrders = activeuser2.FinishedOrders;
-                
-                if(FinishedOrders == null || FinishedOrders.Count == 0){
-                Console.WriteLine("No Orders found!");
-                activeuser2.FinishedOrders = new List<StoreOrder>();
-                }
-                foreach(StoreOrder storeorder in FinishedOrders){
-                foreach(CustomerOrder Prodorder in storeorder.Orders!){
-                    Console.WriteLine($"| {Prodorder.ProductName} | Qty: {Prodorder.Quantity} || ${Prodorder.TotalPrice}");
-                }
+                while(!exit){
+                    if(FinishedOrders == null || FinishedOrders.Count == 0){
+                    Console.WriteLine("No Orders found!");
+                    activeuser2.FinishedOrders = new List<StoreOrder>();
+                    }
+                    foreach(StoreOrder storeorder in FinishedOrders){
+                        Console.WriteLine(storeorder.OrderDate);
+                        foreach(CustomerOrder Prodorder in storeorder.Orders!){
+                            Console.WriteLine($"| {Prodorder.ProductName} | Qty: {Prodorder.Quantity} || ${Prodorder.TotalPrice}");
+                            
+                        }
+                        Console.WriteLine("Total $:" + storeorder.TotalAmount);
+                        Console.WriteLine("-------------------");
+                    }
+
+                    Console.WriteLine("[1] Sort by Lowest Price");
+                    Console.WriteLine("[2] Sort by Newest Date");
+                    Console.WriteLine("[3] Sort by Highest Price");
+                    Console.WriteLine("[4] Sort by Oldest Date");
+                    Console.WriteLine("[x] exit");
+                    string sortselection = Console.ReadLine();
+                    if(sortselection =="1"){
+                        FinishedOrders.Sort((x, y) => x.TotalAmount.CompareTo(y.TotalAmount));
+                    }
+                    if(sortselection =="2"){
+                    FinishedOrders.Sort((x, y) => y.OrderDate.CompareTo(x.OrderDate));
+                    }
+                    if(sortselection =="3"){
+                        FinishedOrders.Sort((x,y) => y.TotalAmount.CompareTo(x.TotalAmount));
+                    }
+                    if(sortselection =="4"){
+                    FinishedOrders.Sort((x,y) => x.OrderDate.CompareTo(y.OrderDate));
+                    }
+                    if(sortselection =="x"){
+                        exit = true;
+                    }
                 }
                 break;
-                
+
                 case "x":
                 exit = true;
                 break;

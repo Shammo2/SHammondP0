@@ -1,1 +1,55 @@
 2022-01-10 17:46:26.953 -08:00 [INF] new user added to database
+2022-01-11 09:27:15.654 -08:00 [INF] Product added Lime0.7542
+2022-01-11 09:27:24.488 -08:00 [INF] Manager login "2022-01-11T09:27:24.4881407-08:00"
+2022-01-11 09:27:30.345 -08:00 [INF] new user added to database test
+2022-01-11 09:28:16.554 -08:00 [INF] new customer order added to database52175217
+2022-01-11 09:28:47.605 -08:00 [INF] Customer order has been updated 712175217
+2022-01-11 09:28:47.687 -08:00 [INF] Store Order Added 71217575217.00
+2022-01-11 09:29:15.747 -08:00 [INF] user signed in 5217
+2022-01-11 09:30:43.541 -08:00 [INF] Manager login "2022-01-11T09:30:43.5415333-08:00"
+2022-01-11 09:32:27.952 -08:00 [INF] new customer order added to database52175217
+2022-01-11 09:34:59.359 -08:00 [INF] user signed in 5217
+2022-01-11 09:35:39.591 -08:00 [INF] Product added test2.9943
+2022-01-11 09:35:42.111 -08:00 [INF] Manager login "2022-01-11T09:35:42.1114281-08:00"
+2022-01-11 09:36:01.271 -08:00 [INF] user signed in 5217
+2022-01-11 11:07:17.935 -08:00 [INF] Product added testing312
+2022-01-11 11:07:21.286 -08:00 [INF] Manager login "2022-01-11T11:07:21.2862703-08:00"
+2022-01-11 11:16:08.750 -08:00 [INF] Product added Lime0.7512
+2022-01-11 11:16:10.350 -08:00 [INF] Manager login "2022-01-11T11:16:10.3504817-08:00"
+2022-01-11 11:16:20.939 -08:00 [INF] user signed in 5217
+2022-01-11 11:18:30.827 -08:00 [INF] new user added to database test
+2022-01-11 11:18:38.039 -08:00 [INF] user signed in 2786
+2022-01-11 11:19:58.443 -08:00 [INF] Product added Lime0.7526
+2022-01-11 11:20:01.517 -08:00 [INF] Manager login "2022-01-11T11:20:01.5168300-08:00"
+2022-01-11 11:20:13.920 -08:00 [INF] user signed in 2786
+2022-01-11 11:20:46.912 -08:00 [INF] Product added apple1.3541
+2022-01-11 11:20:49.502 -08:00 [INF] Manager login "2022-01-11T11:20:49.5028148-08:00"
+2022-01-11 11:28:50.194 -08:00 [INF] new customer order added to database27862786
+2022-01-11 11:29:09.531 -08:00 [INF] Customer order has been updated 42902786
+2022-01-11 11:29:09.616 -08:00 [INF] Store Order Added 429074712786.00
+2022-01-11 11:36:56.043 -08:00 [INF] Product added Lime1.25123
+2022-01-11 11:37:29.068 -08:00 [INF] Product added Apple1.35125
+2022-01-11 11:37:32.907 -08:00 [INF] Manager login "2022-01-11T11:37:32.9074628-08:00"
+2022-01-11 11:38:36.642 -08:00 [INF] new customer order added to database278616.20
+2022-01-11 11:43:41.110 -08:00 [INF] new customer order added to database278616.20
+2022-01-11 11:43:55.907 -08:00 [INF] new customer order added to database27865.25
+2022-01-11 11:44:27.833 -08:00 [INF] Customer order has been updated 115292786
+2022-01-11 11:44:28.024 -08:00 [INF] Customer order has been updated 115292786
+2022-01-11 11:44:28.105 -08:00 [INF] Store Order Added 11529747121.45
+2022-01-11 11:47:25.902 -08:00 [INF] new customer order added to database278613.50
+2022-01-11 11:47:30.397 -08:00 [INF] Customer order has been updated 74522786
+2022-01-11 11:47:30.479 -08:00 [INF] Store Order Added 7452954913.50
+2022-01-11 11:55:15.799 -08:00 [INF] new customer order added to database27867.50
+2022-01-11 11:58:46.353 -08:00 [INF] new customer order added to database27862.50
+2022-01-11 11:59:04.551 -08:00 [INF] new customer order added to database27862.70
+2022-01-11 11:59:12.316 -08:00 [INF] Customer order has been updated 228722786
+2022-01-11 11:59:12.486 -08:00 [INF] Customer order has been updated 228722786
+2022-01-11 11:59:12.746 -08:00 [INF] Store Order Added 2287274715.20
+2022-01-11 11:59:40.716 -08:00 [INF] new customer order added to database27863.75
+2022-01-11 11:59:47.059 -08:00 [INF] new customer order added to database27865.40
+2022-01-11 11:59:50.923 -08:00 [INF] Customer order has been updated 306282786
+2022-01-11 11:59:51.002 -08:00 [INF] Customer order has been updated 306282786
+2022-01-11 11:59:51.183 -08:00 [INF] Store Order Added 3062874719.15
+2022-01-11 12:32:09.202 -08:00 [INF] user signed in 2786
+2022-01-11 13:13:13.262 -08:00 [INF] Manager login "2022-01-11T13:13:13.2586859-08:00"
+2022-01-11 13:13:53.287 -08:00 [INF] Manager login "2022-01-11T13:13:53.2875763-08:00"

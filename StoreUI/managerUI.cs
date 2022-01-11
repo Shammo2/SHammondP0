@@ -10,7 +10,6 @@ public class ManagerUI{
          private StoreStorage _BL;
          public ManagerUI(){
         _BL = new StoreStorage();
-        
         }
         
         public void StartManager(){
@@ -56,6 +55,7 @@ public class ManagerUI{
             case "x":
             managerExit = true;
             break;
+            
             default:
             Console.WriteLine("Input not found try again");
             break;
@@ -89,25 +89,51 @@ public void manager(){
     } 
 
 private void ViewOrderHistory(){
-
-List<Storefront> storeorders = _BL.GetAllStores();
-//List<StoreOrder> getallOrders = _BL.GetAllOrders();
-    for(int i = 0; i < storeorders.Count; i++)
-    {
-        Console.WriteLine($"[{i}] Name: {storeorders[i].Name} \nAddress: {storeorders[i].Address}");
+    List<Storefront> AllStores = _BL.GetAllStores();
+    
+    for(int i = 0; i < AllStores.Count; i++){
+        Console.WriteLine($"[{i}] Name: {AllStores[i].Name} \nAddress: {AllStores[i].Address}");
     }
+    Console.WriteLine("Select a store");
     int storeselection = Int32.Parse(Console.ReadLine());
     Console.WriteLine(storeselection);
-
-    // foreach(Storefront storeorder in storeorders){
-    //             Console.WriteLine($"\nPlaced on {storeorder.OrderDate} by {storeorder.CustomerID}");
+    int StoreIndex= (int)storeselection;
+    List<StoreOrder> StoreOrders = AllStores[StoreIndex].StoreOrders;
+    bool exit = false;
     
-    //             foreach(CustomerOrder Order in storeorder.Orders!){
-    //             Console.WriteLine($"| {Order.ProductName} | Qty: {Order.Quantity} || ${Order.TotalPrice}");
-    //             }
-    //             Console.WriteLine($"| Total Price: ${storeorder.TotalAmount}");
-    //         }
+    while(!exit){
+        foreach(StoreOrder storeorder in StoreOrders){
+            Console.WriteLine($"\nPlaced on {storeorder.OrderDate} by {storeorder.CustomerID}");
 
+            foreach(CustomerOrder Order in storeorder.Orders){
+            Console.WriteLine($"| {Order.ProductName} | Qty: {Order.Quantity} || ${Order.TotalPrice}");
+            }
+            Console.WriteLine("Total $:" + storeorder.TotalAmount);
+            Console.WriteLine("-------------------");
+            }
+        
+        Console.WriteLine("[1] Sort by Lowest Price");
+        Console.WriteLine("[2] Sort by Newest Date");
+        Console.WriteLine("[3] Sort by Highest Price");
+        Console.WriteLine("[4] Sort by Oldest Date");
+        Console.WriteLine("[x] exit");
+        string sortselection = Console.ReadLine();
+        if(sortselection =="1"){
+            StoreOrders.Sort((x, y) => x.TotalAmount.CompareTo(y.TotalAmount));
+        }
+        if(sortselection =="2"){
+        StoreOrders.Sort((x, y) => y.OrderDate.CompareTo(x.OrderDate));
+        }
+        if(sortselection =="3"){
+            StoreOrders.Sort((x,y) => y.TotalAmount.CompareTo(x.TotalAmount));
+        }
+        if(sortselection =="4"){
+        StoreOrders.Sort((x,y) => x.OrderDate.CompareTo(y.OrderDate));
+        }
+        if(sortselection =="x"){
+            exit = true;
+        }
+    }
 }
     private void MakeAStore(){
     List<Storefront> AllStores = _BL.GetAllStores();
@@ -142,7 +168,9 @@ List<Storefront> storeorders = _BL.GetAllStores();
             Console.WriteLine(storeselection);
             int StoreIndex1= (int)storeselection;
             Console.WriteLine("Select a Item To update");
-            List<Product> StoreInventory =_BL.GetAllProduct(StoreIndex1);
+            
+            int StoreID= AllStores[StoreIndex1].StoreID;
+            List<Product> StoreInventory =_BL.GetAllProduct(StoreID);
             for(int i = 0; i < StoreInventory.Count; i++){
                 Console.WriteLine($"[{i}] Name: {StoreInventory[i].ProductName} \nDescription: {StoreInventory[i].Description} \nQuantity: {StoreInventory[i].Quantity} \nPrice: {StoreInventory[i].Price}" ); 
             }
@@ -151,7 +179,7 @@ List<Storefront> storeorders = _BL.GetAllStores();
             Console.WriteLine("you chose" + StoreInventory[productselection].ProductName);
             Console.WriteLine("Enter quantity");
             int quantityadjust = Int32.Parse(Console.ReadLine());
-            //StoreInventory[productselection].Quantity= quantityadjust;
+
             int ProductID =StoreInventory[productselection].ItemID;
             
             _BL.UpdateProduct(ProductID,quantityadjust);
@@ -185,6 +213,7 @@ List<Storefront> storeorders = _BL.GetAllStores();
                     int ItemID = rnd.Next(10000);
                     
                     Product ProductToAdd = new Product{
+                        StoreID =  AllStores[selection].StoreID,
                         ProductName = prodname,
                         Description =description,
                         Price = price,

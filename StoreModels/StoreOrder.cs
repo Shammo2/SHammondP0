@@ -8,9 +8,9 @@ public class StoreOrder{
     public StoreOrder(DataRow r){
         orderID = (int) r["OrderID"];
         CustomerID = (int) r["CustomerID"];
-        storeID = (int) r["storeID"];
+        storeID = (int) r["StoreID"];
         TotalAmount = (decimal)r["TotalAmount"];
-        OrderDate =(string)r["OrderDate"];
+        OrderDate =r["OrderDate"].ToString();
     }
 
     public int? orderID { get; set; }
