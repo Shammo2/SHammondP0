@@ -30,7 +30,7 @@ while(!exit){
                 List<CustomerOrder>  currentCart = activeuser.Cart;
                 int storeID =0;
                 if(activeuser.Cart == null || currentCart.Count == 0){ 
-                    //Console.WriteLine(" You have no items ");
+                    Console.WriteLine(" You have no items ");
                     activeuser.Cart = new List<CustomerOrder>();
                 }
                 else{
@@ -112,18 +112,26 @@ while(!exit){
 
                 case "3":
                 Console.WriteLine("you entered view order history");
+                List<Customer> allUsers2 = _BL.GetAllUsers();
+                Customer activeuser2 = _BL.GetActiveUser(CustomerId);
+                List<StoreOrder> FinishedOrders = activeuser2.FinishedOrders;
                 
-                List<StoreOrder> Orderhistory =_BL.GetAllUserOrders(CustomerId);
-                List<StoreOrder> getallUsers = _BL.GetAllUsers();
-                Customer activeuser2 = _BL.GetActiveUser(CustomerId); 
-                List<StoreOrder> Orderhistory2 = activeuser2.Orders;
-                    for(int i = 0; i < Orderhistory2.Count; i++){
-                    Console.WriteLine($"[{i}] Name: {Orderhistory[i].SelectedProduct} \nDescription: {Orderhistory[i].Quantity} \nQuantity: {Orderhistory[i].OrderId}" ); 
-                    }
+                if(FinishedOrders == null || FinishedOrders.Count == 0){
+                Console.WriteLine("No Orders found!");
+                activeuser2.FinishedOrders = new List<StoreOrder>();
+                }
+                foreach(StoreOrder storeorder in FinishedOrders){
+                foreach(CustomerOrder Prodorder in storeorder.Orders!){
+                    Console.WriteLine($"| {Prodorder.ProductName} | Qty: {Prodorder.Quantity} || ${Prodorder.TotalPrice}");
+                }
+                }
                 break;
                 
                 case "x":
                 exit = true;
+                break;
+                default:
+                Console.WriteLine("Input not found try again");
                 break;
 
                 }
@@ -138,7 +146,7 @@ public void Checkout(int CustomerId, int storeID, decimal CustomerTotal, List<Cu
                 double currTimeSeconds = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds;
                 Random rnd = new Random();
                 int orderNum = rnd.Next(100000);
-                // order num is the order number accosiated with the order we are creating (new store order)
+                // order num is the order number associated with the order we are creating (new store order)
                 foreach(CustomerOrder cOrder in currentCart){
                     
                     _BL.UpdateCustomerOrder(CustomerId, orderNum);

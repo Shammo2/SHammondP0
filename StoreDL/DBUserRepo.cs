@@ -1,6 +1,7 @@
 using Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Serilog;
 namespace StoreDL;
 
 public class DBUserRepo{
@@ -76,6 +77,7 @@ public void AddUser(Customer userToAdd){
         //Executing command
         cmdAddUser.ExecuteNonQuery();
         connection.Close();
+        Log.Information("new user added to database {username}", userToAdd.UserName);
     }
 
     public Customer GetActiveUser(int CustomerId){
@@ -88,6 +90,7 @@ public void AddUser(Customer userToAdd){
         }
         // if you don't find the customer make a new one
         return new Customer();
+        
     }
 
 
@@ -102,15 +105,16 @@ public void AddUser(Customer userToAdd){
         cmdcartorder.Parameters.AddWithValue("@customorderid", currentcartorder.CustomerOrderID );
         cmdcartorder.Parameters.AddWithValue("@productid", currentcartorder.ProductID );
         cmdcartorder.Parameters.AddWithValue("@productname", currentcartorder.ProductName );
-        cmdcartorder.Parameters.AddWithValue("@totalprice", currentcartorder.TotalPrice );
+        cmdcartorder.Parameters.AddWithValue("@totalprice", currentcartorder.CustomerID );
         cmdcartorder.Parameters.AddWithValue("@quantity", currentcartorder.Quantity);
         
         cmdcartorder.ExecuteNonQuery();
         connection.Close();
+        Log.Information("new customer order added to database{customer}{totalprice}",currentcartorder.CustomerID,currentcartorder.CustomerID );
     }
 
 /// <summary>
-/// This is used to take the Customerorderid which is set to 0 by default and update the number to what the store its purchased from so we can refrence it later 
+/// This is used to take the Customer orderid which is set to 0 by default and update the number to what the store its purchased from so we can refrence it later 
 /// </summary>
 /// <param name="CustomerID"></param>
 /// <param name="CustomerOrderID"></param>
@@ -125,16 +129,11 @@ public void AddUser(Customer userToAdd){
     
     cmdEditProd.ExecuteNonQuery();
     connection.Close();
+    Log.Information("Customer order has been updated {CustomerOrderID}{CustomerID}",CustomerOrderID,CustomerID);
     
     }
 
 
 
-
-
-
-
-
-    
 }
 

@@ -41,6 +41,7 @@ public class StoreStorage{
     
 // }
 
+
 public void AddStoreOrder(StoreOrder newStoreOrder){
     _dl.AddStoreOrder(newStoreOrder);
 }

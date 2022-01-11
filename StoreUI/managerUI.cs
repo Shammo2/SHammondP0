@@ -1,8 +1,7 @@
-//using Serilog;
-//using Microsoft.Extensions.Logging;
+
 using Models;
 using StoreBL;
-using System.Text.RegularExpressions;
+
 namespace UI;
 
 
@@ -11,6 +10,7 @@ public class ManagerUI{
          private StoreStorage _BL;
          public ManagerUI(){
         _BL = new StoreStorage();
+        
         }
         
         public void StartManager(){
@@ -45,7 +45,7 @@ public class ManagerUI{
             break;
             case "2":
                 Console.WriteLine("You Entered: view order history");
-                //ViewOrderHistory();
+                ViewOrderHistory();
             break;
             
             case"3":
@@ -55,6 +55,9 @@ public class ManagerUI{
             
             case "x":
             managerExit = true;
+            break;
+            default:
+            Console.WriteLine("Input not found try again");
             break;
     }
  }
@@ -85,26 +88,27 @@ public void manager(){
     
     } 
 
-// private void ViewOrderHistory(){
+private void ViewOrderHistory(){
 
-// List<Storefront> storeorders = _BL.GetAllStores();
-// List<StoreOrder> getallOrders = _BL.GetAllOrders(StoreIndex1);
-//     for(int i = 0; i < storeorders.Count; i++)
-//     {
-//         Console.WriteLine($"[{i}] Name: {storeorders[i].Name} \nAddress: {storeorders[i].Address}");
-//     }
-//     int storeselection = Int32.Parse(Console.ReadLine());
-//     Console.WriteLine(storeselection);
+List<Storefront> storeorders = _BL.GetAllStores();
+//List<StoreOrder> getallOrders = _BL.GetAllOrders();
+    for(int i = 0; i < storeorders.Count; i++)
+    {
+        Console.WriteLine($"[{i}] Name: {storeorders[i].Name} \nAddress: {storeorders[i].Address}");
+    }
+    int storeselection = Int32.Parse(Console.ReadLine());
+    Console.WriteLine(storeselection);
 
-//     foreach(StoreOrder storeorder in getallOrders){
-//                 Console.WriteLine($"\nPlaced on {storeorder.OrderDate} by {storeorder.CustomerID}");
-//                 foreach(CustomerOrder Order in storeorder.Orders!){
-//                     Console.WriteLine($"| {Order.ProductName} | Qty: {Order.Quantity} || ${Order.TotalPrice}");
-//                 }
-//                 Console.WriteLine($"| Total Price: ${storeorder.TotalAmount}");
-//             }
+    // foreach(Storefront storeorder in storeorders){
+    //             Console.WriteLine($"\nPlaced on {storeorder.OrderDate} by {storeorder.CustomerID}");
+    
+    //             foreach(CustomerOrder Order in storeorder.Orders!){
+    //             Console.WriteLine($"| {Order.ProductName} | Qty: {Order.Quantity} || ${Order.TotalPrice}");
+    //             }
+    //             Console.WriteLine($"| Total Price: ${storeorder.TotalAmount}");
+    //         }
 
-// }
+}
     private void MakeAStore(){
     List<Storefront> AllStores = _BL.GetAllStores();
     Console.WriteLine("You Entered: make a store ");

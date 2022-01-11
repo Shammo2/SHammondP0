@@ -1,3 +1,6 @@
+using Microsoft.Data.SqlClient;
+using System.Data;
+using Serilog;
 using Models;
 using StoreBL;
 namespace UI;
@@ -48,6 +51,7 @@ while(!exit){
 
                             Console.WriteLine("signed in ");
                             new UserMenu().StartUserMenu(CustomerId);
+                            Log.Information("user signed in {CustomerId}",CustomerId );
                             }
                             else{
                                 Console.WriteLine("Try again");
@@ -82,9 +86,13 @@ while(!exit){
                     case "3":
                     Console.WriteLine(" you entered: manager login ");
                     new ManagerUI().manager();
+                    Log.Information("Manager login {now}",DateTime.Now);
                     break;
                     case "x":
                     exit = true;
+                    break;
+                    default:
+                    Console.WriteLine("Input not found try again");
                     break;
         }
     } 

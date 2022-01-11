@@ -1,6 +1,7 @@
 using Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Serilog;
 namespace StoreDL;
 
 public class DBStoreRepo{
@@ -11,7 +12,10 @@ public class DBStoreRepo{
     _connectionString = File.ReadAllText("connectionString.txt");
     
 }
-
+/// <summary>
+/// Get all stores is used to pull all the stores and any related data from the SQL table
+/// </summary>
+/// <returns></returns>
 public List<Storefront> GetAllStores(){
     List<Storefront> allstores = new List<Storefront>();
     using SqlConnection connection = new SqlConnection(_connectionString);
@@ -66,6 +70,11 @@ public List<Storefront> GetAllStores(){
         }
         return allstores;
 }
+/// <summary>
+/// Get all products is used to grab each product from the selected store (by index)
+/// </summary>
+/// <param name="StoreIndex"></param>
+/// <returns></returns>
 public List<Product> GetAllProduct(int StoreIndex){
     List<Product> allProd = new List<Product>();
     using SqlConnection connection = new SqlConnection(_connectionString);
@@ -100,8 +109,6 @@ public void UpdateProduct(int ItemID, int quantityadjust){
     cmdEditProd.ExecuteNonQuery();
     connection.Close();
 
-
-    
 }
 public List<StoreOrder> GetAllOrders(int StoreIndex){
     List<StoreOrder> allStoreOrders = new List<StoreOrder>();
@@ -123,12 +130,6 @@ public List<StoreOrder> GetAllOrders(int StoreIndex){
         
     return  allStoreOrders;
 }
-    
-    // using SqlConnection connection = new SqlConnection(_connectionString);
-    //     connection.Open();
-    //     connection.Close();
-    //return new List<CustomerOrder>();
-//}
 
 
 /// <summary>
@@ -166,6 +167,7 @@ public void AddStore(Storefront StoreToAdd){
         
         cmdAddProd.ExecuteNonQuery();
         connection.Close();
+        Log.Information("Product added {name}{price}{quantity}", ProductToAdd.ProductName,ProductToAdd.Price,ProductToAdd.Quantity);
     }
 
     public void AddStoreOrder(StoreOrder newStoreOrder){
@@ -183,6 +185,7 @@ public void AddStore(Storefront StoreToAdd){
 
         cmd.ExecuteNonQuery();
         connection.Close();
+        Log.Information("Store Order Added {orderId}{storeId}{total}", newStoreOrder.orderID,newStoreOrder.storeID,newStoreOrder.TotalAmount);
 
     }
     
