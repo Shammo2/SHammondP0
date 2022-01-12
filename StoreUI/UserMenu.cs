@@ -21,6 +21,7 @@ while(!exit){
         Console.WriteLine("[3] view order history");
         Console.WriteLine("[x] Exit");
         string menuinput = Console.ReadLine();
+            
             switch(menuinput){
 
                 case "1":
@@ -46,12 +47,12 @@ while(!exit){
                 CustomerTotal += currentCart[i].TotalPrice;
                 
                 }
-
+                Console.WriteLine("---Total Price--- ");
                 Console.WriteLine(CustomerTotal);
                 Console.WriteLine("Checkout? Y/N");
                 string checkoutinput = Console.ReadLine();
                 if(checkoutinput == "y"){
-                Console.WriteLine("You chose checkout");
+                Console.WriteLine("Checkout Complete");
                 
                 Checkout(CustomerId,storeID,CustomerTotal, currentCart);
                 }
@@ -63,7 +64,7 @@ while(!exit){
                 break;
 
                 case "2":
-                Console.WriteLine("You entered: View stores and inventory");
+                Console.WriteLine("===You entered: View stores and inventory===");
                 Console.WriteLine(" Stores: ");
                 List<Storefront> AllStores = _storeBL.GetAllStores();
                 Console.WriteLine(" ===Stores=== ");
@@ -94,7 +95,6 @@ while(!exit){
                 Product currentproduct = StoreInventory[productIndex];
                 Console.WriteLine("Select Quantity ");
                 int? Itemquantity = Int32.Parse(Console.ReadLine());
-
                 
                 int ProductQuantity = currentproduct.Quantity;
                 int ItemID = currentproduct.ItemID;
@@ -119,12 +119,10 @@ while(!exit){
                 catch(Exception ex){
                     Console.WriteLine(ex.Message);
                 }
-                
-                
                 break;
 
                 case "3":
-                Console.WriteLine("you entered view order history");
+                Console.WriteLine("===you entered view order history===");
                 List<Customer> allUsers2 = _BL.GetAllUsers();
                 Customer activeuser2 = _BL.GetActiveUser(CustomerId);
                 List<StoreOrder> FinishedOrders = activeuser2.FinishedOrders;
@@ -170,11 +168,12 @@ while(!exit){
                 case "x":
                 exit = true;
                 break;
+                
                 default:
                 Console.WriteLine("Input not found try again");
                 break;
 
-                }
+            }
     
         }
     Console.WriteLine("goodbye");

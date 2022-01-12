@@ -62,7 +62,10 @@ public List<Customer> GetAllUsers(){
     }
     return GetAllCustomers;
 }
-
+/// <summary>
+/// Add user takes in info from MainMenu UI and adds it to the database
+/// </summary>
+/// <param name="userToAdd"></param>
 public void AddUser(Customer userToAdd){
         //Establishing new connection
         using SqlConnection connection = new SqlConnection(_connectionString);
@@ -80,6 +83,11 @@ public void AddUser(Customer userToAdd){
         Log.Information("new user added to database {username}", userToAdd.UserName);
     }
 
+/// <summary>
+/// Get active user grabs the user that is signed in currently so we can use it when assigning product orders and order history. 
+/// </summary>
+/// <param name="CustomerId"></param>
+/// <returns></returns>
     public Customer GetActiveUser(int CustomerId){
     List<Customer> allUsers = GetAllUsers();
         foreach(Customer user in allUsers){

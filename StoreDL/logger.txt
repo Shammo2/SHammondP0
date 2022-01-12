@@ -53,3 +53,37 @@
 2022-01-11 12:32:09.202 -08:00 [INF] user signed in 2786
 2022-01-11 13:13:13.262 -08:00 [INF] Manager login "2022-01-11T13:13:13.2586859-08:00"
 2022-01-11 13:13:53.287 -08:00 [INF] Manager login "2022-01-11T13:13:53.2875763-08:00"
+2022-01-11 18:30:16.565 -08:00 [INF] Product added Lime0.7528
+2022-01-11 18:30:47.714 -08:00 [INF] Product added Apple1.3534
+2022-01-11 18:31:00.526 -08:00 [INF] Manager login "2022-01-11T18:31:00.5263536-08:00"
+2022-01-11 18:31:14.007 -08:00 [INF] new user added to database newuser
+2022-01-11 18:31:26.965 -08:00 [INF] new customer order added to database948016.50
+2022-01-11 18:31:41.440 -08:00 [INF] new customer order added to database948016.20
+2022-01-11 18:32:28.670 -08:00 [INF] Customer order has been updated 211089480
+2022-01-11 18:32:28.873 -08:00 [INF] Customer order has been updated 211089480
+2022-01-11 18:32:28.953 -08:00 [INF] Store Order Added 21108338132.70
+2022-01-11 18:33:19.068 -08:00 [INF] user signed in 2786
+2022-01-11 18:34:39.967 -08:00 [INF] new customer order added to database27862.70
+2022-01-11 18:34:48.762 -08:00 [INF] Customer order has been updated 402372786
+2022-01-11 18:34:48.840 -08:00 [INF] Store Order Added 4023733812.70
+2022-01-11 19:07:31.115 -08:00 [INF] Product added Lime0.7568
+2022-01-11 19:09:53.520 -08:00 [INF] Product added Granny Smith Apple1.3559
+2022-01-11 19:10:42.715 -08:00 [INF] Manager login "2022-01-11T19:10:42.7151019-08:00"
+2022-01-11 19:10:52.061 -08:00 [INF] new user added to database Test
+2022-01-11 19:11:19.973 -08:00 [INF] new customer order added to database18175.40
+2022-01-11 19:11:29.947 -08:00 [INF] new customer order added to database18172.25
+2022-01-11 19:11:38.310 -08:00 [INF] Customer order has been updated 573161817
+2022-01-11 19:11:38.386 -08:00 [INF] Customer order has been updated 573161817
+2022-01-11 19:11:38.467 -08:00 [INF] Store Order Added 5731663487.65
+2022-01-11 19:16:39.906 -08:00 [INF] new customer order added to database18172.25
+2022-01-11 19:16:53.378 -08:00 [INF] new customer order added to database181714.85
+2022-01-11 19:17:10.661 -08:00 [INF] new customer order added to database18174.05
+2022-01-11 19:17:19.408 -08:00 [INF] Customer order has been updated 229121817
+2022-01-11 19:17:19.523 -08:00 [INF] Customer order has been updated 229121817
+2022-01-11 19:17:19.597 -08:00 [INF] Customer order has been updated 229121817
+2022-01-11 19:17:19.676 -08:00 [INF] Store Order Added 22912634821.15
+2022-01-11 19:17:55.303 -08:00 [INF] user signed in 1817
+2022-01-11 19:23:24.140 -08:00 [INF] new customer order added to database18174.05
+2022-01-11 19:23:28.249 -08:00 [INF] Customer order has been updated 960831817
+2022-01-11 19:23:28.326 -08:00 [INF] Store Order Added 9608363484.05
+2022-01-11 19:23:53.800 -08:00 [INF] user signed in 1817
