@@ -6,5 +6,6 @@ using UI;
 Log.Logger = new LoggerConfiguration()
     .WriteTo.File(@"..\StoreDL\logger.txt")
     .CreateLogger();
+
 MainMenu menu = new MainMenu();
 menu.Start();

@@ -87,9 +87,10 @@ while(!exit){
                 }
                 
                 //product select
-                Console.WriteLine("Select Products to add to cart  ");
+                Console.WriteLine("Select Products to add to cart ");
                 int Itemselection = Int32.Parse(Console.ReadLine());
                 int productIndex= Itemselection;
+                
                 
                 // quantity
                 Product currentproduct = StoreInventory[productIndex];
